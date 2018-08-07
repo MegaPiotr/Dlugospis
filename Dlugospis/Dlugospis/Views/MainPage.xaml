@@ -5,7 +5,9 @@
              Title="{Binding Title}">
 
     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Label Text="Welcome to Xamarin Forms and Prism!" />
+        <Button Text="Długi"/>
+        <Button Text="Dodaj dług"/>
+        <Button Text="Znajomi"/>
     </StackLayout>
 
 </ContentPage>
