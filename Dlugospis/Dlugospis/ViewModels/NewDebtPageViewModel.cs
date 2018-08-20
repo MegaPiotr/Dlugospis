@@ -22,8 +22,10 @@ namespace Dlugospis.ViewModels
         public AsyncCommand GetPhotoCommand { get; private set; }
         private readonly IMediaService _mediaService;
 
+        public string Title{get;set;}
         public NewDebtPageViewModel(IMediaService mediaService)
         {
+            Title = "kupa5";
             _mediaService = mediaService;
             TakePhotoCommand = new AsyncCommand(TakePhoto);
             GetPhotoCommand = new AsyncCommand(GetPhoto);

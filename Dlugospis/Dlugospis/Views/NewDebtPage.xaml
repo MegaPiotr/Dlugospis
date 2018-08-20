@@ -7,7 +7,8 @@
              xmlns:controls1="clr-namespace:XamlElements.Controls;assembly=XamlElements"
              xmlns:enums="clr-namespace:Models.Enums;assembly=Models"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Dlugospis.Views.NewDebtPage">
+             x:Class="Dlugospis.Views.NewDebtPage"
+             Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:SubjectTypeToVisibility x:Key="SubToVis"/>

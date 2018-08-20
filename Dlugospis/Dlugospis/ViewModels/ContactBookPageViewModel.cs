@@ -18,9 +18,10 @@ namespace Dlugospis.ViewModels
         public IContactStore ContactStore { get; }
 
         public NotifyTask NotifyTask { get; private set; }
-
+        public string Title { get; set; }
         public ContactBookPageViewModel(IContactStore store, INavigationService navigationService)
         {
+            Title = "kupa";
             ContactStore = store;
             _navigationService = navigationService;
             NotifyTask = NotifyTask.Create(InitializeAsync);

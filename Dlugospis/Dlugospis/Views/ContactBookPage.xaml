@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Dlugospis.Views.ContactBookPage">
+             x:Class="Dlugospis.Views.ContactBookPage"
+             Title="{Binding Title}">
     <StackLayout>
         <Button Command="{Binding AddContactCommand}"/>
         <ListView ItemsSource="{Binding ContactStore.FilteredContacts}">

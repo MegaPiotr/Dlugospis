@@ -29,7 +29,7 @@ namespace Dlugospis
         {
             InitializeComponent();
 
-            NavigationService.NavigateAsync("NavigationPage/MainPage");
+            NavigationService.NavigateAsync("NavigationPage/MainPage?createTab=NewDebtPage&createTab=DebtBookPage&createTab=ContactBookPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -41,6 +41,7 @@ namespace Dlugospis
             containerRegistry.RegisterForNavigation<ContactBookPage>();
             containerRegistry.RegisterForNavigation<NewContactPage>();
             containerRegistry.RegisterForNavigation<ContactBookPage>();
+            containerRegistry.RegisterForNavigation<DebtBookPage>();
         }
 
         private void RegisterServices(IContainerRegistry containerRegistry)
