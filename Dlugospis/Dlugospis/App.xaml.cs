@@ -5,6 +5,11 @@ using Dlugospis.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Prism.Autofac;
+using System;
+using Dlugospis.Services;
+using Dlugospis.Services.DatabaseConnectionService;
+using Dlugospis.Services.MediaService;
+using Dlugospis.Services.ContactStore;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Dlugospis
@@ -20,17 +25,29 @@ namespace Dlugospis
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
 
-        protected override async void OnInitialized()
+        protected override void OnInitialized()
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            NavigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            RegisterServices(containerRegistry);
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage>();
+            containerRegistry.RegisterForNavigation<NewDebtPage>();
+            containerRegistry.RegisterForNavigation<ContactBookPage>();
+            containerRegistry.RegisterForNavigation<NewContactPage>();
+            containerRegistry.RegisterForNavigation<ContactBookPage>();
+        }
+
+        private void RegisterServices(IContainerRegistry containerRegistry)
+        {
+            containerRegistry.RegisterSingleton<IMediaService, MediaService>();
+            containerRegistry.RegisterSingleton<IDatabaseConnectionService, DatabaseConnectionService>();
+            containerRegistry.RegisterSingleton<IContactStore,ContactStore>();
         }
     }
 }

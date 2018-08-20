@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:controls="clr-namespace:SegmentedControl.FormsPlugin.Abstractions;assembly=SegmentedControl.FormsPlugin.Abstractions"
+             xmlns:converters="clr-namespace:XamlElements.Converters;assembly=XamlElements"
+             xmlns:controls1="clr-namespace:XamlElements.Controls;assembly=XamlElements"
+             xmlns:enums="clr-namespace:Models.Enums;assembly=Models"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Dlugospis.Views.NewDebtPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:SubjectTypeToVisibility x:Key="SubToVis"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+
+        <controls:SegmentedControl x:Name="SegUser" TintColor="#007AFF" SelectedSegment="{Binding UserType}" >
+            <controls:SegmentedControl.Children>
+                <controls:SegmentedControlOption Text="Biorę" />
+                <controls:SegmentedControlOption Text="Daję" />
+            </controls:SegmentedControl.Children>
+        </controls:SegmentedControl>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <!--<Label Text="{Binding Source={x:Reference SegControl}, Path=SelectedSegment, Converter={StaticResource SegToDes}}"/>-->
+            <Entry Text="Jakiś koleś" IsEnabled="False"/>
+            <Button Image="address_book.png"/>
+        </StackLayout>
+
+        <controls:SegmentedControl x:Name="SegSubject" TintColor="#007AFF" SelectedSegment="{Binding SubjectType}">
+            <controls:SegmentedControl.Children>
+                <controls:SegmentedControlOption Text="Pieniądze" />
+                <controls:SegmentedControlOption Text="Przedmiot" />
+            </controls:SegmentedControl.Children>
+        </controls:SegmentedControl>
+        <controls1:ValidableEntry
+            Text="{Binding Money}" 
+            Header="Pieniążki"
+            IsValid="{Binding IsMoneyValid}"  
+            HorizontalOptions="FillAndExpand" 
+            Keyboard="Numeric"
+            Rules="{Binding Rules}"
+            IsVisible="{Binding 
+            Source={x:Reference SegSubject},
+            Path=SelectedSegment,
+            Converter={StaticResource SubToVis},
+            ConverterParameter={x:Static enums:SubjectType.Money}}"
+            />
+
+        <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                     IsVisible="{Binding 
+            Source={x:Reference SegSubject},
+            Path=SelectedSegment,
+            Converter={StaticResource SubToVis},
+            ConverterParameter={x:Static enums:SubjectType.Subject}}">
+
+            <Label Text="Opis"/>
+            <Entry Text="Opisz to coś"/>
+
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Zrób zdjęcie" Command="{Binding TakePhotoCommand}"/>
+                <Button Text="Laduj zdjęcie" Command="{Binding GetPhotoCommand}"/>
+            </StackLayout>
+            <Image x:Name="PhotoImage" Source="{Binding Image}"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

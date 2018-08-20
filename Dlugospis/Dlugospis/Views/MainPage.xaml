@@ -5,9 +5,9 @@
              Title="{Binding Title}">
 
     <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Button Text="Długi"/>
-        <Button Text="Dodaj dług"/>
-        <Button Text="Znajomi"/>
+        <Button Text="Długi" Command="{Binding ShowDebtsCommand}"/>
+        <Button Text="Dodaj dług" Command="{Binding AddDebtCommand}"/>
+        <Button Text="Znajomi" Command="{Binding ShowFriendsCommand}"/>
     </StackLayout>
 
 </ContentPage>

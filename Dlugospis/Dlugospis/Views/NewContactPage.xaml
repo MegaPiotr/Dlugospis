@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Dlugospis.Views.NewContactPage">
+    <StackLayout >
+        <Entry Text="{Binding Contact.Name}" Placeholder="Imię"/>
+        <Entry Text="{Binding Contact.Surname}" Placeholder="Nazwisko"/>
+        <Entry Text="{Binding Contact.Nick}" Placeholder="Nick"/>
+        <Entry Text="{Binding Contact.BankNumber}" Placeholder="Numer konta"/>
+        <Button Text="Dodaj" Command="{Binding AddContactCommand}"/>
+    </StackLayout>
+</ContentPage>
