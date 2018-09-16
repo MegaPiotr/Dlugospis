@@ -5,7 +5,7 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <Color x:Key="ErrorColor">#ff5252</Color>
-            <Color x:Key="GreenColor">#00ff00</Color>
+            <Color x:Key="BlackColor">#000000</Color>
             <OnPlatform x:Key="LittleSize"
                         x:TypeArguments="x:Double">
                 <On Platform="iOS" Value="11" />
@@ -28,7 +28,7 @@
                 <Setter Property="FontSize"
                     Value="{StaticResource LittleSize}" />
                 <Setter Property="TextColor"
-                    Value="{StaticResource GreenColor}" />
+                    Value="{StaticResource BlackColor}" />
                 <Setter Property="HorizontalOptions"
                     Value="Start" />
             </Style>

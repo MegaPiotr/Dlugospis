@@ -15,5 +15,7 @@ namespace Models.DataBase
         public string Nick { get; set; }
         //public byte[] Photo { get; set; }
         public string BankNumber { get; set; }
+        [Ignore]
+        public string FullName => Name + " " + Surname + " (" + Nick + ")";
     }
 }

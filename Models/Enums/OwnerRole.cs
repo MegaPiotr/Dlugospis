@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Models.Enums
 {
-    public enum UserType
+    public enum OwnerRole
     {
-        Recipient,
-        Giver
+        Giver,
+        Recipient
     }
 }

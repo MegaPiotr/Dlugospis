@@ -24,7 +24,7 @@ namespace Validation.Rules
         }
         private bool Has2PlacesAfterDot(string value)
         {
-            var strings = value.Split('.');
+            var strings = value.Split(',');
             if (strings.Length < 2)
                 return true;
 

@@ -1,4 +1,4 @@
-﻿using Dlugospis.Services.ContactStore;
+﻿using Dlugospis.Services.Stores;
 using Models.DataBase;
 using Nito.Mvvm;
 using Prism.Commands;
@@ -13,14 +13,11 @@ namespace Dlugospis.ViewModels
 {
     public class NewContactPageViewModel : BindableBase
     {
-        public AsyncCommand AddContactCommand { get; private set; }
-        private readonly IContactStore _contactStore;
+        private readonly IStore<Contact> _contactStore;
+
         private readonly INavigationService _navigationService;
-        public Contact Contact
-        {
-            get; set;
-        }
-        public NewContactPageViewModel(IContactStore store, INavigationService navigationService)
+        
+        public NewContactPageViewModel(IStore<Contact> store, INavigationService navigationService)
         {
             _contactStore = store;
             _navigationService = navigationService;
@@ -28,15 +25,13 @@ namespace Dlugospis.ViewModels
             Contact = new Contact();
         }
 
+        public AsyncCommand AddContactCommand { get; private set; }
+
+        public Contact Contact { get; set; }
+
         private async Task AddContact()
         {
-            try
-            {
-                await _contactStore.SeveContactAsync(Contact);
-            }catch(Exception ex)
-            {
-
-            }
+            await _contactStore.SeveAsync(Contact);
             await _navigationService.GoBackAsync();
         }
     }

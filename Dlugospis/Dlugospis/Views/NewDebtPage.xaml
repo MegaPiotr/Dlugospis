@@ -17,7 +17,7 @@
 
     <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
 
-        <controls:SegmentedControl x:Name="SegUser" TintColor="#007AFF" SelectedSegment="{Binding UserType}" >
+        <controls:SegmentedControl x:Name="SegUser" TintColor="#007AFF" SelectedSegment="{Binding OwnerRole}" >
             <controls:SegmentedControl.Children>
                 <controls:SegmentedControlOption Text="Biorę" />
                 <controls:SegmentedControlOption Text="Daję" />
@@ -26,8 +26,8 @@
 
         <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
             <!--<Label Text="{Binding Source={x:Reference SegControl}, Path=SelectedSegment, Converter={StaticResource SegToDes}}"/>-->
-            <Entry Text="Jakiś koleś" IsEnabled="False"/>
-            <Button Image="address_book.png"/>
+            <Entry Placeholder="Wybierz osobę" IsEnabled="False" Text="{Binding Person.FullName}"/>
+            <Button Image="address_book.png" Command="{Binding TakeFromContactBookCommand}"/>
         </StackLayout>
 
         <controls:SegmentedControl x:Name="SegSubject" TintColor="#007AFF" SelectedSegment="{Binding SubjectType}">
@@ -38,7 +38,7 @@
         </controls:SegmentedControl>
         <controls1:ValidableEntry
             Text="{Binding Money}" 
-            Header="Pieniążki"
+            Header="Kwota"
             IsValid="{Binding IsMoneyValid}"  
             HorizontalOptions="FillAndExpand" 
             Keyboard="Numeric"
@@ -58,7 +58,7 @@
             ConverterParameter={x:Static enums:SubjectType.Subject}}">
 
             <Label Text="Opis"/>
-            <Entry Text="Opisz to coś"/>
+            <Entry Placeholder="Opisz to coś" Text="{Binding Description}"/>
 
             <StackLayout Orientation="Horizontal">
                 <Button Text="Zrób zdjęcie" Command="{Binding TakePhotoCommand}"/>
@@ -66,5 +66,6 @@
             </StackLayout>
             <Image x:Name="PhotoImage" Source="{Binding Image}"/>
         </StackLayout>
+        <Button Text="Dodaj" Command="{Binding AcceptCommand}" VerticalOptions="EndAndExpand"/>
     </StackLayout>
 </ContentPage>

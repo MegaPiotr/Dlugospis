@@ -2,17 +2,39 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:converters="clr-namespace:XamlElements.Converters;assembly=XamlElements"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Dlugospis.Views.ContactBookPage"
              Title="{Binding Title}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BooleanToSelectionMode x:Key="BoolToSelMode"/>
+            <converters:SelectedItemArgsToContact x:Key="ItemToContact"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <StackLayout>
-        <Button Command="{Binding AddContactCommand}"/>
-        <ListView ItemsSource="{Binding ContactStore.FilteredContacts}">
-        <ListView.ItemTemplate>
+        <Button Text="Dodaj kontakt" Command="{Binding AddContactCommand}"/>
+        <ListView 
+            ItemsSource="{Binding ContactStore.Content}" 
+            SelectionMode="{Binding CanChoose, Converter={StaticResource BoolToSelMode}}"
+            >
+            <ListView.Behaviors>
+                <b:EventToCommandBehavior EventName="ItemSelected" 
+                                      Command="{Binding SelectCommand}"
+                                      EventArgsConverter="{StaticResource ItemToContact}" />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <Label Text="{Binding Name}"/>
-                </ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding FullName}"/>
+                            <StackLayout Orientation="Horizontal"  HorizontalOptions="EndAndExpand" IsVisible="{Binding CanEdit}">
+                                <Button Text="E"/>
+                                <Button Text="X"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>

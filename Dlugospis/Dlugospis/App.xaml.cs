@@ -9,7 +9,8 @@ using System;
 using Dlugospis.Services;
 using Dlugospis.Services.DatabaseConnectionService;
 using Dlugospis.Services.MediaService;
-using Dlugospis.Services.ContactStore;
+using Dlugospis.Services.Stores;
+using Models.DataBase;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Dlugospis
@@ -48,7 +49,8 @@ namespace Dlugospis
         {
             containerRegistry.RegisterSingleton<IMediaService, MediaService>();
             containerRegistry.RegisterSingleton<IDatabaseConnectionService, DatabaseConnectionService>();
-            containerRegistry.RegisterSingleton<IContactStore,ContactStore>();
+            containerRegistry.RegisterSingleton<IStore<Contact>,ContactStore>();
+            containerRegistry.RegisterSingleton<IStore<Debt>, DebtStore>();
         }
     }
 }

@@ -15,25 +15,27 @@ namespace Dlugospis.Services.MediaService
     {
         public MediaService()
         {
-            NotifyTask = NotifyTask.Create(InitializeAsync);
+            InitializeTask = NotifyTask.Create(InitializeAsync);
         }
+
+        public NotifyTask InitializeTask { get; private set; }
+
+        public bool CanPickImage { get; private set; }
+
+        public bool CanTakePhoto { get; private set; }
 
         private async Task InitializeAsync()
         {
             await CrossMedia.Current.Initialize();
             var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
             var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
-            if(storageStatus==PermissionStatus.Granted)
+            if (storageStatus == PermissionStatus.Granted)
             {
                 CanPickImage = true;
                 if (cameraStatus == PermissionStatus.Granted)
                     CanTakePhoto = true;
             }
         }
-
-        public NotifyTask NotifyTask { get; private set; }
-        public bool CanPickImage { get; private set; }
-        public bool CanTakePhoto { get; private set; }
 
         private async Task<bool> GetPermisions(params Permission[] permisons)
         {
@@ -43,6 +45,7 @@ namespace Dlugospis.Services.MediaService
                     return false;
             return true;
         }
+
         public async Task<ImageSource> PickImageAsync()
         {
             if(!CanPickImage)

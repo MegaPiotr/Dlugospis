@@ -9,36 +9,31 @@ using System.Threading.Tasks;
 
 namespace Dlugospis.Services.DatabaseConnectionService
 {
-    public class DatabaseConnectionService:IDatabaseConnectionService
+    public class DatabaseConnectionService : IDatabaseConnectionService
     {
-        private SQLiteAsyncConnection database;
+        
         private const string databaseFile = "DlugospisSQLite.db3";
 
         public DatabaseConnectionService()
         {
-            NotifyTask=NotifyTask.Create(CreateDatabaseAsync);
+            InitializeTask = NotifyTask.Create(CreateDatabaseAsync);
         }
+
+        private SQLiteAsyncConnection database;
         public SQLiteAsyncConnection Database => database;
 
         public AsyncTableQuery<Contact> ContactTable => database.Table<Contact>();
 
         public AsyncTableQuery<Debt> DebtTable => database.Table<Debt>();
 
-        public NotifyTask NotifyTask { get; private set; }
+        public NotifyTask InitializeTask { get; private set; }
 
         private async Task CreateDatabaseAsync()
         {
-            try
-            {
-                string dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), databaseFile);
-                database = new SQLiteAsyncConnection(dbpath);
-                await database.CreateTableAsync<Debt>();
-                await database.CreateTableAsync<Contact>();
-            }
-            catch(Exception ex)
-            {
-
-            }
+            string dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), databaseFile);
+            database = new SQLiteAsyncConnection(dbpath);
+            await database.CreateTableAsync<Debt>();
+            await database.CreateTableAsync<Contact>();
         }
     }
 }

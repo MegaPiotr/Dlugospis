@@ -5,5 +5,18 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Dlugospis.Views.DebtBookPage"
              Title="{Binding Title}">
-  
+    <StackLayout>
+        <ListView ItemsSource="{Binding DebtStore.Content}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Money}"/>
+                            <Label Text="{Binding Person.FullName}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

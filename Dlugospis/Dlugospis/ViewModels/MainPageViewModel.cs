@@ -9,10 +9,9 @@ using System.Text;
 
 namespace Dlugospis.ViewModels
 {
-    public class MainPageViewModel : ViewModelBase
+    public class MainPageViewModel : BindableBase
     {
-        public MainPageViewModel(INavigationService navigationService) 
-            : base (navigationService)
+        public MainPageViewModel() 
         {
         }
     }

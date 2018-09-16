@@ -8,6 +8,6 @@ namespace Dlugospis
 {
     public interface IInitializable
     {
-        NotifyTask NotifyTask { get; }
+        NotifyTask InitializeTask { get; }
     }
 }
